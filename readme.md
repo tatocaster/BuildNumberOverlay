@@ -16,7 +16,6 @@ and
 ```
 dependencies {
     debugCompile 'com.github.tatocaster:BuildNumberOverlay:1.0'
-    releaseCompile 'com.github.tatocaster:BuildNumberOverlay-no-op:1.0'
 }
 ```
 
