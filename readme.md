@@ -1,6 +1,6 @@
 #BuildNumberOverlay [![](https://jitpack.io/v/tatocaster/BuildNumberOverlay.svg)](https://jitpack.io/#tatocaster/BuildNumberOverlay)
 
-*Works only in DEBUG builds. Release builds will ignore it*
+
 
 #install
 ```
