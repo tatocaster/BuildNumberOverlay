@@ -1,4 +1,4 @@
-#BuildNumberOverlay
+#BuildNumberOverlay [![](https://jitpack.io/v/tatocaster/BuildNumberOverlay.svg)](https://jitpack.io/#tatocaster/BuildNumberOverlay)
 
 #install
 ```
