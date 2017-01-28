@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
-group='com.github.tatocaster'
+group='com.github.tatocaster.BuildNumberOverlay'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
