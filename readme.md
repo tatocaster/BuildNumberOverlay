@@ -17,7 +17,7 @@ dependencies {
 }
 ```
 
-Library uses SYSTEM_WINDOW to show a build number and name over the top of apps
+Library uses SYSTEM_ALERT_WINDOW permission to show a build number and name over the top of the apps
 
 supports **minSdk : 11** aka **Android 3.0**
 
