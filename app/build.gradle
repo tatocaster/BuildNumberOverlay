@@ -14,10 +14,21 @@ android {
             enabled true
         }
     }
+
+    signingConfigs {
+        release {
+            storeFile file(project.property("MyProject.signing"))
+            storePassword project.property("MyProject.storePassword")
+            keyAlias project.property("MyProject.keyAlias")
+            keyPassword project.property("MyProject.keyPassword")
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {
@@ -36,7 +47,9 @@ dependencies {
     compile libraries.supportDesign
     compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
 
-    compile 'com.github.tatocaster:BuildNumberOverlay:1.0'
+    debugCompile 'com.github.tatocaster:BuildNumberOverlay:1.0'
+//    releaseCompile 'com.github.tatocaster:BuildNumberOverlay-no-op:1.0'
+    releaseCompile project(':buildnumberoverlaylibrary-no-op')
 
     debugCompile libraries.leakCanary
     releaseCompile libraries.leakCanaryReleaseAndTest

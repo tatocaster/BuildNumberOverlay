@@ -1,1 +1,3 @@
-include ':app', ':buildnumberoverlaylibrary'
+include ':app'
+include ':buildnumberoverlaylibrary'
+include ':buildnumberoverlaylibrary-no-op'
