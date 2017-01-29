@@ -15,7 +15,7 @@ allprojects {
 and 
 ```
 dependencies {
-    debugCompile 'com.github.tatocaster:BuildNumberOverlay:1.0'
+    compile 'com.github.tatocaster:BuildNumberOverlay:1.0'
 }
 ```
 
