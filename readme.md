@@ -1,8 +1,12 @@
 #BuildNumberOverlay [![](https://jitpack.io/v/tatocaster/BuildNumberOverlay.svg)](https://jitpack.io/#tatocaster/BuildNumberOverlay)
 
+#Usage
+
+If you have multiple builds and flavors 
+use in debug builds to detect the current running app version
 
 
-#install
+#Install
 ```
 allprojects {
  repositories {
@@ -31,6 +35,14 @@ Initialize in your application class
 NumberOverlay.initialize(this);
 ```
 
+
+*Because of JitPack issues no-op version will be added to next release*
+*until then use it as shown below, please*
+```
+if(BuildConfig.DEBUG)
+            NumberOverlay.initialize(this);
+```
+
 multiple times init will cause error
 `NumberOverlayException` :  
 `"Can not initialize multiple times!"`
@@ -39,6 +51,7 @@ multiple times init will cause error
  but behind the scenes `initialize()` method use this.
  
  ***more to come***
+ - add no-op library for releaseCompile
  - change background color
  - change text color
  - change position as user configures
