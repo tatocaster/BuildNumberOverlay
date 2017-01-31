@@ -44,6 +44,10 @@ multiple times init will cause error
  - change text color
  - change position as user configures
 
+# Quick contributing guide
+ - Fork and clone locally
+ - Create a topic specific branch. Add some nice feature.
+ - Send a Pull Request to spread the fun!
 
 #License
 ```
