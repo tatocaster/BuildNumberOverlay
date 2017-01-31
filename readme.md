@@ -22,7 +22,7 @@ dependencies {
 
 Library uses SYSTEM_ALERT_WINDOW permission to show a build number and name over the top of the apps
 
-supports **minSdk : 11** aka **Android 3.0**
+supports **minSdk : 11**
 
 <img src="https://raw.githubusercontent.com/tatocaster/BuildNumberOverlay/master/art/art.png" alt="All in one" width="300">
 
@@ -31,13 +31,14 @@ Initialize in your application class
 ```
 NumberOverlay.initialize(this);
 ```
+*demo* : [MyApp.java](https://github.com/tatocaster/BuildNumberOverlay/blob/master/app/src/main/java/me/tatocaster/buildversionoverlay/MyApp.java#L17)
 
 multiple times init will cause error
 `NumberOverlayException` :  
 `"Can not initialize multiple times!"`
 
-`NumberOverlay` class has method `isInitialized()` for advanced login in your application
- but behind the scenes `initialize()` method use this.
+`NumberOverlay` class has method `isInitialized()` for advanced logic in your application
+ but behind the scenes `initialize()` method uses this.
  
  ***more to come***
  - change background color
