@@ -3,7 +3,7 @@
 *Works only in DEBUG builds. Release builds will ignore it*
 
 #Install
-```
+```gradle
 allprojects {
  repositories {
     jcenter()
@@ -13,7 +13,7 @@ allprojects {
 ```
 
 and 
-```
+```groovy
 dependencies {
     debugCompile 'com.github.tatocaster.BuildNumberOverlay:buildnumberoverlaylibrary:1.0.1'
     releaseCompile 'com.github.tatocaster.BuildNumberOverlay:buildnumberoverlaylibrary-no-op:1.0.1'
@@ -28,7 +28,7 @@ supports **minSdk : 11**
 
 Initialize in your application class
 
-```
+```java
 NumberOverlay.initialize(this);
 ```
 *demo* : [MyApp.java](https://github.com/tatocaster/BuildNumberOverlay/blob/master/app/src/main/java/me/tatocaster/buildversionoverlay/MyApp.java#L17)
