@@ -38,6 +38,7 @@ public class AccessPermissionActivity extends AppCompatActivity {
     private void startOverlayService() {
         if (!Utils.isOverlayingServiceIsRunning(this, OverlayService.class))
             startService(new Intent(AccessPermissionActivity.this, OverlayService.class));
+        finish();
     }
 
     /**
