@@ -2,7 +2,6 @@ package me.tatocaster.buildnumberoverlaylibrary.NumberOverlayView;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
-import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -10,6 +9,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import me.tatocaster.buildnumberoverlaylibrary.utils.Utils;
 
 /**
@@ -30,6 +30,8 @@ public class OverlayView extends View {
 
     private static final int CANVAS_WIDTH = 300;
     private static final int CANVAS_HEIGHT = 150;
+    private int backgroundColor;
+    private int textColor;
     /**
      * main package info
      */
@@ -39,6 +41,13 @@ public class OverlayView extends View {
     public OverlayView(Context context) {
         super(context);
         init(context);
+    }
+
+    public OverlayView(Context context, int backgroundColor, int textColor) {
+        super(context);
+        init(context);
+        this.backgroundColor = backgroundColor;
+        this.textColor = textColor;
     }
 
     public OverlayView(Context context, AttributeSet attrs) {
@@ -51,6 +60,11 @@ public class OverlayView extends View {
         mPackageInfo = Utils.getVersionInfo(mContext);
     }
 
+   /* public void customize(int backgroundColor, int textColor) {
+        this.backgroundColor = backgroundColor;
+        this.textColor = textColor;
+    } */
+
     public void addToWindowManager() {
         WindowManager.LayoutParams windowLayoutParams = new WindowManager.LayoutParams(
                 CANVAS_WIDTH,
@@ -61,12 +75,12 @@ public class OverlayView extends View {
         windowLayoutParams.gravity = Gravity.BOTTOM | Gravity.END;
 
         mLinearLayout = new LinearLayout(mContext);
-        mLinearLayout.setBackgroundColor(Color.BLACK);
+        mLinearLayout.setBackgroundColor(backgroundColor);
         mWindowManager = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
         mWindowManager.addView(mLinearLayout, windowLayoutParams);
 
         TextView textView = new TextView(mContext);
-        textView.setTextColor(Color.RED);
+        textView.setTextColor(textColor);
         textView.setText(
                 String.format("Name: %s \n Code: %s",
                         mPackageInfo.versionName,

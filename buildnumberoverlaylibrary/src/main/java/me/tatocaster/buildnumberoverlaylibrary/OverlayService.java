@@ -26,8 +26,14 @@ public class OverlayService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        if(intent != null)
+        mOverlayView = new OverlayView(NumberOverlay.getApplicationContext(),
+                intent.getExtras().getIntArray("customizations")[0],
+                intent.getExtras().getIntArray("customizations")[1]);
+      /*  if(intent!= null)
+        mOverlayView.customize(intent.getExtras().getIntArray("customizations")[0],
+                intent.getExtras().getIntArray("customizations")[1]); */
 
-        mOverlayView = new OverlayView(NumberOverlay.getApplicationContext());
         mOverlayView.addToWindowManager();
 
         // this needs to be here, because without the startForeground(), our view will not retain always

@@ -47,7 +47,8 @@ dependencies {
     compile libraries.supportDesign
     compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
 
-    debugCompile 'com.github.tatocaster.BuildNumberOverlay:buildnumberoverlaylibrary:1.0.1'
+    //debugCompile 'com.github.tatocaster.BuildNumberOverlay:buildnumberoverlaylibrary:1.0.1'
+    debugCompile project(':buildnumberoverlaylibrary') //compile it locally
     releaseCompile 'com.github.tatocaster.BuildNumberOverlay:buildnumberoverlaylibrary-no-op:1.0.1'
 
     debugCompile libraries.leakCanary

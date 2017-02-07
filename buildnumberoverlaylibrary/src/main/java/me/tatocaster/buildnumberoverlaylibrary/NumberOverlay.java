@@ -16,6 +16,7 @@ public class NumberOverlay {
 
     private static final String MULTIPLE_INSTANCE_ERROR_STRING = "Can not initialize multiple times!";
 
+    private static int[] customArray = null;
 
     /**
      * instance
@@ -32,7 +33,8 @@ public class NumberOverlay {
      *
      * @param applicationContext The application context
      */
-    public static synchronized void initialize(Context applicationContext) {
+
+    public static synchronized void initialize(Context applicationContext, final int backgroundColor, final int textColor) {
         if (instance != null || initialized) {
             throw new NumberOverlayException(MULTIPLE_INSTANCE_ERROR_STRING);
         }
@@ -41,9 +43,12 @@ public class NumberOverlay {
         NumberOverlay.applicationContext = applicationContext;
 
         Intent intent = new Intent(getApplicationContext(), AccessPermissionActivity.class);
+        customArray = new int[] {backgroundColor, textColor}; //0% chance of being null. null cannot be passed to primitives
+        intent.putExtra("customizations", customArray);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         getApplicationContext().startActivity(intent);
     }
+
 
 
     /**
