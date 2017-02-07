@@ -12,6 +12,7 @@
 
 # User-specific stuff:
 .idea/workspace.xml
+projectFilesBackup/.idea/workspace.xml
 .idea/tasks.xml
 
 # Sensitive or high-churn files:

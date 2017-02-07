@@ -45,6 +45,8 @@ public class AccessPermissionActivity extends AppCompatActivity {
             intent.putExtra("customizations", customsPassingToService);
             startService(intent);
         }
+        finish();
+
     }
 
     /**
