@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.NotificationCompat;
 
 import me.tatocaster.buildnumberoverlaylibrary.NumberOverlayView.OverlayView;
+import me.tatocaster.buildnumberoverlaylibrary.exceptions.OutOfBoundsException;
 
 /**
  * Created by tatocaster on 1/28/17.
@@ -29,12 +30,14 @@ public class OverlayService extends Service {
         if(intent != null)
         mOverlayView = new OverlayView(NumberOverlay.getApplicationContext(),
                 intent.getExtras().getIntArray("customizations")[0],
-                intent.getExtras().getIntArray("customizations")[1]);
-      /*  if(intent!= null)
-        mOverlayView.customize(intent.getExtras().getIntArray("customizations")[0],
-                intent.getExtras().getIntArray("customizations")[1]); */
-
-        mOverlayView.addToWindowManager();
+                intent.getExtras().getIntArray("customizations")[1],
+                340, 203);
+        try {
+            mOverlayView.addToWindowManager();
+        }
+        catch(OutOfBoundsException e) {
+            System.out.println(e.getMessage());
+        }
 
         // this needs to be here, because without the startForeground(), our view will not retain always
 /*        startForeground(FOREGROUND_ID, createNotification());
