@@ -17,7 +17,7 @@ import me.tatocaster.buildnumberoverlaylibrary.exceptions.OutOfBoundsException;
 public class OverlayService extends Service {
     private static final String TAG = "OverlayService";
     private static final int FOREGROUND_ID = 9998;
-    private OverlayView mOverlayView;
+    private OverlayView mOverlayView = null;
 
     @Nullable
     @Override
@@ -27,16 +27,24 @@ public class OverlayService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if(intent != null)
-        mOverlayView = new OverlayView(NumberOverlay.getApplicationContext(),
-                intent.getExtras().getIntArray("customizations")[0],
-                intent.getExtras().getIntArray("customizations")[1],
-                340, 203);
-        try {
-            mOverlayView.addToWindowManager();
-        }
-        catch(OutOfBoundsException e) {
-            System.out.println(e.getMessage());
+
+        if(intent != null) {
+            if (intent.getExtras().getIntArray("customizations").length == 2) //making stuff safe {
+                mOverlayView = new OverlayView(NumberOverlay.getApplicationContext(),
+                        intent.getExtras().getIntArray("customizations")[0],
+                        intent.getExtras().getIntArray("customizations")[1]);
+            else
+                mOverlayView = new OverlayView(NumberOverlay.getApplicationContext(),
+                        intent.getExtras().getIntArray("customizations")[0],
+                        intent.getExtras().getIntArray("customizations")[1],
+                        intent.getExtras().getIntArray("customizations")[2],
+                        intent.getExtras().getIntArray("customizations")[3]);
+
+            try {
+                mOverlayView.addToWindowManager();
+            } catch (OutOfBoundsException e) {
+                System.out.println(e.getMessage());
+            }
         }
 
         // this needs to be here, because without the startForeground(), our view will not retain always

@@ -34,7 +34,7 @@ public class NumberOverlay {
      * @param applicationContext The application context
      */
 
-    public static synchronized void initialize(Context applicationContext, final int backgroundColor, final int textColor) {
+    private static synchronized void createInstance(Context applicationContext) {
         if (instance != null || initialized) {
             throw new NumberOverlayException(MULTIPLE_INSTANCE_ERROR_STRING);
         }
@@ -42,8 +42,33 @@ public class NumberOverlay {
         instance = new NumberOverlay();
         NumberOverlay.applicationContext = applicationContext;
 
-        Intent intent = new Intent(getApplicationContext(), AccessPermissionActivity.class);
-        customArray = new int[] {backgroundColor, textColor}; //0% chance of being null. null cannot be passed to primitives
+    }
+    private static Intent getIntent() {
+        return new Intent(getApplicationContext(), AccessPermissionActivity.class);
+    }
+    public static synchronized void initialize(Context applicationContext, final int backgroundColor, final int textColor) {
+        createInstance(applicationContext);
+        Intent intent = getIntent();
+        customArray = new int[] {backgroundColor, textColor};
+        intent.putExtra("customizations", customArray);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        getApplicationContext().startActivity(intent);
+    }
+
+    public static synchronized void initialize(final int CANVAS_HEIGHT, final int CANVAS_WIDTH, Context applicationContext) {
+        createInstance(applicationContext);
+        Intent intent = getIntent();
+        customArray = new int[] {CANVAS_HEIGHT, CANVAS_WIDTH};
+        intent.putExtra("customizations", customArray);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        getApplicationContext().startActivity(intent);
+    }
+
+    public static synchronized void initialize(Context applicationContext, final int backgroundColor, final int textColor,
+                                               final int CANVAS_HEIGHT, final int CANVAS_WIDTH) {
+        createInstance(applicationContext);
+        Intent intent = getIntent();
+        customArray = new int[] {backgroundColor, textColor, CANVAS_HEIGHT, CANVAS_WIDTH};
         intent.putExtra("customizations", customArray);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         getApplicationContext().startActivity(intent);

@@ -14,7 +14,11 @@ public class MyApp extends Application {
     public void onCreate() {
         super.onCreate();
 
-        // initialize build number overlay
-        NumberOverlay.initialize(this, Color.BLUE, Color.RED);
+        // initialize build number overlay like this
+        NumberOverlay.initialize(this, Color.GREEN, Color.WHITE);
+        // or like this
+        /*NumberOverlay.initialize(this, 200, 100); */
+        // or even like this
+        /* NumberOverlay.initialize(this, Color.GREEN, Color.WHITE, 200, 100); */
     }
 }
