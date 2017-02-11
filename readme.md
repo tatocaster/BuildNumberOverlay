@@ -26,24 +26,32 @@ supports **minSdk : 11**
 
 <img src="https://raw.githubusercontent.com/tatocaster/BuildNumberOverlay/master/art/art.png" alt="All in one" width="300">
 
-Initialize in your application class
+You can initialize differently in your application class. Here are some examples:
 
 ```java
 NumberOverlay.initialize(this);
 ```
-*demo* : [MyApp.java](https://github.com/tatocaster/BuildNumberOverlay/blob/master/app/src/main/java/me/tatocaster/buildversionoverlay/MyApp.java#L17)
+Only colors:
+```java
+NumberOverlay.initialize(this, Color.GREEN, Color.WHITE);
+```
+Only dimensions:
+```java
+NumberOverlay.initialize(this, 200, 100);
+```
+Both of them:
+```java
+NumberOverlay.initialize(this, Color.GREEN, Color.WHITE, 200, 100);
+```
 
-multiple times init will cause error
+*demo* : [MyApp.java](https://github.com/tatocaster/BuildNumberOverlay/blob/master/app/src/main/java/me/tatocaster/buildversionoverlay/MyApp.java)
+
+multiple times init will cause the error
 `NumberOverlayException` :  
 `"Can not initialize multiple times!"`
 
 `NumberOverlay` class has method `isInitialized()` for advanced logic in your application
  but behind the scenes `initialize()` method uses this.
- 
- ***more to come***
- - change background color
- - change text color
- - change position as user configures
 
 # Quick contributing guide
  - Fork and clone locally
