@@ -110,8 +110,8 @@ public class OverlayView extends View {
         if(sumDiff >= 50 && sumDiff < 100) textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, (int)getResources().getDimension(R.dimen.light)); //test it
         else if(sumDiff >= 100 && sumDiff < 150) textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, (int)getResources().getDimension(R.dimen.medium));
         else if(sumDiff >= 150 && sumDiff < 200) textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, (int)getResources().getDimension(R.dimen.a_bit_large));
-        else if(sumDiff == 200) textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, (int)getResources().getDimension(R.dimen.large));
-        else if(sumDiff > 200) {
+        else if(sumDiff >= 200 && sumDiff < 250) textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, (int)getResources().getDimension(R.dimen.large));
+        else if(sumDiff >=250) {
             throw new OutOfBoundsException("Cannot increase height/width any more!");
         }
        /* float currentTextSize = textView.getTextSize();
