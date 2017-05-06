@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="def">42px</dimen>
+    <dimen name="light">55px</dimen>
+    <dimen name="medium">65px</dimen>
+    <dimen name="a_bit_large">80px</dimen>
+    <dimen name="large">95px</dimen>
+</resources>

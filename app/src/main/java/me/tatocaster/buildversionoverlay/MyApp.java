@@ -1,6 +1,7 @@
 package me.tatocaster.buildversionoverlay;
 
 import android.app.Application;
+import android.graphics.Color;
 
 import me.tatocaster.buildnumberoverlaylibrary.NumberOverlay;
 
@@ -13,7 +14,11 @@ public class MyApp extends Application {
     public void onCreate() {
         super.onCreate();
 
-        // initialize build number overlay
-        NumberOverlay.initialize(this);
+        // initialize build number overlay like this
+        NumberOverlay.initialize(this, Color.GRAY, Color.BLACK);
+        // or like this
+        /*NumberOverlay.initialize(this, 200, 100); */
+        // or even like this
+        /* NumberOverlay.initialize(this, Color.GREEN, Color.WHITE, 200, 100); */
     }
 }

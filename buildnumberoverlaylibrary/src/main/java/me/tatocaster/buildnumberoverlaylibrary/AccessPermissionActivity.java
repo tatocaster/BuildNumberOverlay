@@ -12,6 +12,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
+import java.util.HashMap;
+
 import me.tatocaster.buildnumberoverlaylibrary.utils.Utils;
 
 /**
@@ -22,10 +24,13 @@ public class AccessPermissionActivity extends AppCompatActivity {
 
     private static final int PERMISSION_REQUEST_CODE = 9991;
 
+    private static HashMap customsPassingToService = null;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Intent intent = getIntent();
+        customsPassingToService = (HashMap)intent.getExtras().getSerializable("customizations");
         if (isSystemAlertPermissionGranted(this))
             startOverlayService();
         else
@@ -36,9 +41,14 @@ public class AccessPermissionActivity extends AppCompatActivity {
      * start the service
      */
     private void startOverlayService() {
-        if (!Utils.isOverlayingServiceIsRunning(this, OverlayService.class))
-            startService(new Intent(AccessPermissionActivity.this, OverlayService.class));
+
+        if (!Utils.isOverlayingServiceIsRunning(this, OverlayService.class)) {
+            Intent intent = new Intent(AccessPermissionActivity.this, OverlayService.class);
+            intent.putExtra("customizations", customsPassingToService);
+            startService(intent);
+        }
         finish();
+
     }
 
     /**
