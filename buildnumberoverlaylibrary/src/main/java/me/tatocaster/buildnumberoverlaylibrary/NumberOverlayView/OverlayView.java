@@ -52,19 +52,7 @@ public class OverlayView extends View {
         init(context);
     }
 
-    public OverlayView(Context context, int backgroundColor, int textColor) {
-        super(context);
-        init(context);
-        this.backgroundColor = backgroundColor;
-        this.textColor = textColor;
-    }
 
-    public OverlayView(int CANVAS_HEIGHT, int CANVAS_WIDTH, Context context) {
-        super(context);
-        init(context);
-        this.CANVAS_HEIGHT = CANVAS_HEIGHT;
-        this.CANVAS_WIDTH = CANVAS_WIDTH;
-    }
 
     public OverlayView(Context context, int backgroundColor, int textColor, int CANVAS_HEIGHT, int CANVAS_WIDTH) {
         super(context);
