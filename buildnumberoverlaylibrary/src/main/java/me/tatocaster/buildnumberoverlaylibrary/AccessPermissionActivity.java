@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
+import me.tatocaster.buildnumberoverlaylibrary.NumberOverlayView.OverlayView;
 import me.tatocaster.buildnumberoverlaylibrary.utils.Utils;
 
 /**
@@ -21,23 +22,40 @@ import me.tatocaster.buildnumberoverlaylibrary.utils.Utils;
 public class AccessPermissionActivity extends AppCompatActivity {
 
     private static final int PERMISSION_REQUEST_CODE = 9991;
-
+	private static final String PROPERTIES = "Properties";
+	
+	private OverlayView.Properties properties;
+	
+	
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+		
+	    getPropertiesFromExtra();
+	    
         if (isSystemAlertPermissionGranted(this))
-            startOverlayService();
+            startOverlayService(properties);
         else
             requestSystemAlertPermission(this, null, PERMISSION_REQUEST_CODE);
     }
-
-    /**
+	
+	private void getPropertiesFromExtra() {
+		if (getIntent() == null){
+			return;
+		}
+		
+		properties = (OverlayView.Properties) getIntent().getSerializableExtra(PROPERTIES);
+	}
+	
+	/**
      * start the service
-     */
-    private void startOverlayService() {
-        if (!Utils.isOverlayingServiceIsRunning(this, OverlayService.class))
-            startService(new Intent(AccessPermissionActivity.this, OverlayService.class));
+	 * @param properties
+	 */
+    private void startOverlayService(OverlayView.Properties properties) {
+        if (!Utils.isOverlayingServiceIsRunning(this, OverlayService.class)) {
+	        Intent intent = OverlayService.getCallingIntent(this, properties);
+	        startService(intent);
+        }
         finish();
     }
 
@@ -68,8 +86,15 @@ public class AccessPermissionActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == PERMISSION_REQUEST_CODE && isSystemAlertPermissionGranted(NumberOverlay.getApplicationContext()))
-            startOverlayService();
+            startOverlayService(properties);
 
         super.onActivityResult(requestCode, resultCode, data);
+    }
+    
+    public static Intent getCallingIntent(Context context, OverlayView.Properties properties){
+	    Intent intent = new Intent(context, AccessPermissionActivity.class);
+	    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+	    intent.putExtra(PROPERTIES, properties);
+	    return intent;
     }
 }
