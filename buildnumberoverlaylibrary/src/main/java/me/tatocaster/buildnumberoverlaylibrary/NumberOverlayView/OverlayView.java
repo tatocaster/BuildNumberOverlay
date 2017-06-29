@@ -2,14 +2,15 @@ package me.tatocaster.buildnumberoverlaylibrary.NumberOverlayView;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
-import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.util.AttributeSet;
-import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.io.Serializable;
+
 import me.tatocaster.buildnumberoverlaylibrary.utils.Utils;
 
 /**
@@ -28,8 +29,6 @@ public class OverlayView extends View {
     private WindowManager mWindowManager;
     private LinearLayout mLinearLayout;
 
-    private static final int CANVAS_WIDTH = 300;
-    private static final int CANVAS_HEIGHT = 150;
     /**
      * main package info
      */
@@ -51,27 +50,23 @@ public class OverlayView extends View {
         mPackageInfo = Utils.getVersionInfo(mContext);
     }
 
-    public void addToWindowManager() {
+    public void addToWindowManager(Properties properties) {
         WindowManager.LayoutParams windowLayoutParams = new WindowManager.LayoutParams(
-                CANVAS_WIDTH,
-                CANVAS_HEIGHT,
+                properties.getCanvasWidth(),
+                properties.getCanvasHeight(),
                 WindowManager.LayoutParams.TYPE_PHONE,
                 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
                 PixelFormat.TRANSLUCENT);
-        windowLayoutParams.gravity = Gravity.BOTTOM | Gravity.END;
+        windowLayoutParams.gravity = properties.getGravity();
 
         mLinearLayout = new LinearLayout(mContext);
-        mLinearLayout.setBackgroundColor(Color.BLACK);
+        mLinearLayout.setBackgroundColor(properties.getBackgroundColor());
         mWindowManager = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
         mWindowManager.addView(mLinearLayout, windowLayoutParams);
 
         TextView textView = new TextView(mContext);
-        textView.setTextColor(Color.RED);
-        textView.setText(
-                String.format("Name: %s \n Code: %s",
-                        mPackageInfo.versionName,
-                        mPackageInfo.versionCode)
-        );
+        textView.setTextColor(properties.getTextColor());
+        textView.setText(properties.getText());
         mLinearLayout.addView(textView);
     }
 
@@ -80,5 +75,62 @@ public class OverlayView extends View {
      */
     public void destroy() {
         mWindowManager.removeView(mLinearLayout);
+    }
+    
+    public static class Properties implements Serializable{
+	    private Integer backgroundColor = null;
+	    private Integer textColor = null;
+	    private String text = null;
+	    private Integer gravity = null;
+	    private Integer canvasHeight = null;
+	    private Integer canvasWidth = null;
+	
+	    public Integer getBackgroundColor() {
+		    return backgroundColor;
+	    }
+	
+	    public Integer getTextColor() {
+		    return textColor;
+	    }
+	
+	    public String getText() {
+		    return text;
+	    }
+	
+	    public Integer getGravity() {
+		    return gravity;
+	    }
+	
+	    public Integer getCanvasHeight() {
+		    return canvasHeight;
+	    }
+	
+	    public Integer getCanvasWidth() {
+		    return canvasWidth;
+	    }
+	
+	    public void setBackgroundColor(int color) {
+		    this.backgroundColor = color;
+	    }
+	
+	    public void setTextColor(int textColor) {
+		    this.textColor = textColor;
+	    }
+	
+	    public void setText(String text) {
+		    this.text = text;
+	    }
+	
+	    public void setGravity(int gravity) {
+		    this.gravity = gravity;
+	    }
+	
+	    public void setCanvasHeight(int canvasHeight) {
+		    this.canvasHeight = canvasHeight;
+	    }
+	
+	    public void setCanvasWidth(int canvasWidth) {
+		    this.canvasWidth = canvasWidth;
+	    }
     }
 }
